@@ -51,27 +51,13 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                           child: Card(
-                            child: ListTile(
-                              leading: Image.network(
+                            child: _listTileCreator(
                                 value.booksList.data!.books![index]!.image
                                     .toString(),
-                                errorBuilder: (context, error, stack) {
-                                  return const Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                  );
-                                },
-                                height: 40,
-                                width: 40,
-                                fit: BoxFit.cover,
-                              ),
-                              title: Text(value
-                                  .booksList.data!.books![index]!.title
-                                  .toString()),
-                              subtitle: Text(value
-                                  .booksList.data!.books![index]!.subtitle
-                                  .toString()),
-                            ),
+                                value.booksList.data!.books![index]!.title
+                                    .toString(),
+                                value.booksList.data!.books![index]!.subtitle
+                                    .toString()),
                           ),
                         );
                       }),
@@ -83,6 +69,36 @@ class _HomePageState extends State<HomePage> {
           }
         }),
       ),
+    );
+  }
+}
+
+class _listTileCreator extends StatelessWidget {
+  String image;
+  String title;
+  String subtitle;
+  Key? keyValue = const Key("ListTile");
+
+  _listTileCreator(this.image, this.title, this.subtitle);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      key: keyValue,
+      leading: Image.network(
+        image,
+        errorBuilder: (context, error, stack) {
+          return const Icon(
+            Icons.error,
+            color: Colors.red,
+          );
+        },
+        height: 40,
+        width: 40,
+        fit: BoxFit.cover,
+      ),
+      title: Text(title),
+      subtitle: Text(subtitle),
     );
   }
 }

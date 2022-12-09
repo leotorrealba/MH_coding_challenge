@@ -19,6 +19,7 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Details'),
         leading: GestureDetector(
+          key: const Key('topBack'),
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
@@ -47,6 +48,7 @@ class DetailsPage extends StatelessWidget {
                         Center(
                           child: Image.network(
                             value.bookDetail.data!.image.toString(),
+                            key: Key('image'),
                             errorBuilder: (context, error, stack) {
                               return const Icon(
                                 Icons.error,
@@ -61,6 +63,7 @@ class DetailsPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(
                           value.bookDetail.data!.title.toString(),
+                          key: const Key('title'),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -70,6 +73,7 @@ class DetailsPage extends StatelessWidget {
                         const SizedBox(height: 5),
                         Text(
                           value.bookDetail.data!.subtitle.toString(),
+                          key: const Key('subtitle'),
                           style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -88,12 +92,14 @@ class DetailsPage extends StatelessWidget {
                         const SizedBox(height: 5.0),
                         Text(
                           value.bookDetail.data!.desc.toString(),
+                          key: const Key('desc'),
                           style: informationStyle,
                           textAlign: TextAlign.justify,
                         ),
                         const SizedBox(height: 15),
                         const Text(
                           'Aditional Information',
+                          key: Key('AditionalInformation'),
                           style: TextStyle(
                               color: Colors.black87,
                               fontSize: 18,
@@ -136,6 +142,7 @@ class DetailsPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
+                            key: const Key('ButtonBack'),
                             onPressed: (() => Navigator.pop(context)),
                             child: const Text('Back'))
                       ],
@@ -158,6 +165,8 @@ class DetailsPage extends StatelessWidget {
 class _textInfo extends StatelessWidget {
   String text;
   TextStyle textStyle;
+  Key keyValue = const Key('textInfo');
+
   _textInfo(this.text, this.textStyle);
 
   @override
@@ -165,6 +174,7 @@ class _textInfo extends StatelessWidget {
     return Text(
       text,
       style: textStyle,
+      key: keyValue,
     );
   }
 }
